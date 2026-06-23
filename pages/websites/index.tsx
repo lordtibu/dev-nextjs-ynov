@@ -1,7 +1,7 @@
 import { Button } from "@/composants/ui/Button";
 import Title from "@/composants/ui/Title";
 import Website from "@/composants/ui/Website";
-import { WebsiteType } from "@/types/Website";
+import { WebsiteType } from "@/types/website";
 
 export async function getStaticProps() {
   const websites = await fetch("http://localhost:3000/websites.json").then(
