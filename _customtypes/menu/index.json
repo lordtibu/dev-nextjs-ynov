@@ -1,0 +1,18 @@
+{
+  "id": "menu",
+  "label": "Menu",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "test": {
+        "type": "Text",
+        "config": {
+          "label": "Test",
+          "placeholder": ""
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}
