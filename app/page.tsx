@@ -5,18 +5,11 @@ import Website from "@/composants/ui/Website";
 import WebsiteHeader from "@/composants/ui/WebsiteHeader";
 import { WebsiteType } from "@/types/website";
 
-export async function getStaticProps() {
-  const websites = await fetch("http://localhost:3000/websites.json").then(
-    (res) => res.json(),
-  );
-  return { props: { websites } };
-}
+export default async function HomePage() {
+  const websites: WebsiteType[] = await fetch(
+    "http://localhost:3000/websites.json"
+  ).then((res) => res.json());
 
-type HomePageType = {
-  websites: WebsiteType[];
-};
-
-export default function HomePage({ websites }: HomePageType) {
   return (
     <main>
       <WebsiteHeader website={websites[0]} />
