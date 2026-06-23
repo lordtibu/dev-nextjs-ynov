@@ -2,15 +2,15 @@ import WebsiteHeader from "@/composants/ui/WebsiteHeader";
 import { WebsiteType } from "@/types/website";
 import { redirect } from "next/navigation";
 
-// export async function getStaticPaths() {
-//   const websites = await fetch("http://localhost:3000/websites.json").then(
-//     (res) => res.json(),
-//   );
-//   const paths = websites.map((w: WebsiteType) => ({
-//     params: { slug: w.slug },
-//   }));
-//   return { paths, fallback: true };
-// }
+export async function generateStaticParams() {
+  const websites: WebsiteType[] = await fetch(
+    "http://localhost:3000/websites.json",
+  ).then((res) => res.json());
+
+  return websites.map((w) => ({
+    slug: w.slug,
+  }));
+}
 
 type WebsitePageType = {
   params: Promise<{ slug: string }>;
