@@ -1,0 +1,9 @@
+{
+  "repositoryName": "booker",
+  "routes": [
+    {
+      "type": "website",
+      "path": "/websites/:uid"
+    }
+  ]
+}

@@ -1,14 +1,14 @@
-import WebsiteHeader from "@/composants/ui/WebsiteHeader";
-import { WebsiteType } from "@/types/website";
+import Title from "@/composants/ui/Title";
+import { createClient } from "@/prismicio";
+import { PrismicNextImage } from "@prismicio/next";
 import { redirect } from "next/navigation";
 
 export async function generateStaticParams() {
-  const websites: WebsiteType[] = await fetch(
-    "http://localhost:3000/websites.json",
-  ).then((res) => res.json());
+  const client = createClient();
+  const websites = await client.getAllByType("website");
 
   return websites.map((w) => ({
-    slug: w.slug,
+    slug: w.uid,
   }));
 }
 
@@ -18,13 +18,20 @@ type WebsitePageType = {
 
 export default async function WebsitePage({ params }: WebsitePageType) {
   const { slug } = await params;
-  const websites: WebsiteType[] = await fetch(
-    "http://localhost:3000/websites.json",
-  ).then((res) => res.json());
-  const currentWebsite = websites.find((w: WebsiteType) => w.slug == slug);
-  if (!currentWebsite) redirect("/websites");
+  const client = createClient();
+  const website = await client
+    .getByUID("website", slug)
+    .catch(() => undefined);
+
+  if (!website) redirect("/websites");
 
   return (
-    <main>{currentWebsite && <WebsiteHeader website={currentWebsite} />}</main>
+    <main className="px-6 py-12">
+      <header className="text-center pb-12">
+        <Title tag="h1">{website.data.title}</Title>
+        <p className="mt-4">{website.data.description}</p>
+      </header>
+      <PrismicNextImage field={website.data.thumbnail} className="rounded-lg" />
+    </main>
   );
 }

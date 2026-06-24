@@ -1,24 +1,20 @@
-import { WebsiteType } from "@/types/website";
-import Image from "next/image";
-import Link from "next/link";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import type { Content } from "@prismicio/client";
 
 export default function Website({
-  website: { slug, title, thumbnail },
+  website,
 }: {
-  website: WebsiteType;
+  website: Content.WebsiteDocument;
 }) {
   return (
-    <Link href={`websites/${slug}`}>
+    <PrismicNextLink document={website}>
       <div className="relative">
-        <Image
-          src={`/websites/${thumbnail}`}
-          alt={`Image ${title}`}
-          width="900"
-          height="600"
+        <PrismicNextImage
+          field={website.data.thumbnail}
           className="rounded-lg"
         />
-        <h3 className="mt-4">{title}</h3>
+        <h3 className="mt-4">{website.data.title}</h3>
       </div>
-    </Link>
+    </PrismicNextLink>
   );
 }
