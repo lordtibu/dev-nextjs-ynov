@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/ancienne-url",
+        destination: "/nouvelle-url",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX();
