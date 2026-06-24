@@ -1,0 +1,10 @@
+{
+  "repositoryName": "booker",
+  "routes": [
+    { "type": "home", "path": "/" },
+    { "type": "contact", "path": "/contact" },
+    { "type": "mentions", "path": "/mentions" },
+    { "type": "websites", "path": "/websites" },
+    { "type": "website", "path": "/websites/:uid" }
+  ]
+}
